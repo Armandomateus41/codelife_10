@@ -1,65 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "@/styles/CodeEditor.module.css";
 
-const CodeEditor: React.FC = () => {
-  const [html, setHtml] = useState("");
-  const [css, setCss] = useState("");
-  const [js, setJs] = useState("");
+interface CodeEditorProps {
+  language: string;
+  value: string;
+  onChange: (value: string) => void;
+  title: string;
+}
 
-  const iframeSrc = `
-    <html>
-      <head>
-        <style>${css}</style>
-      </head>
-      <body>
-        ${html}
-        <script>${js}</script>
-      </body>
-    </html>
-  `;
+const CodeEditor: React.FC<CodeEditorProps> = ({ language, value, onChange, title }) => {
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    onChange(e.target.value);
+  };
 
   return (
-    <div className={styles.editorWrapper}>
-      <h1 className={styles.editorHeader}>Editor de Código Simples</h1>
-      <div className={styles.editor}>
-        <div className={styles.editorColumn}>
-          <div className={styles.editorTitle}>HTML</div>
-          <textarea
-            className={styles.textarea}
-            placeholder="Escreva HTML aqui..."
-            value={html}
-            onChange={(e) => setHtml(e.target.value)}
-          />
-        </div>
-        <div className={styles.editorColumn}>
-          <div className={styles.editorTitle}>CSS</div>
-          <textarea
-            className={styles.textarea}
-            placeholder="Escreva CSS aqui..."
-            value={css}
-            onChange={(e) => setCss(e.target.value)}
-          />
-        </div>
-        <div className={styles.editorColumn}>
-          <div className={styles.editorTitle}>JavaScript</div>
-          <textarea
-            className={styles.textarea}
-            placeholder="Escreva JS aqui..."
-            value={js}
-            onChange={(e) => setJs(e.target.value)}
-          />
-        </div>
-      </div>
-      <div className={styles.preview}>
-        <iframe
-          srcDoc={iframeSrc}
-          title="Code Preview"
-          sandbox="allow-scripts"
-          frameBorder="0"
-          width="100%"
-          height="100%"
-        />
-      </div>
+    <div className={styles.editor}>
+      <h2 className={styles.title}>{title}</h2>
+      <textarea
+        className={styles.textarea}
+        value={value}
+        onChange={handleChange}
+        placeholder={`Escreva ${language.toUpperCase()} aqui...`}
+      />
     </div>
   );
 };
