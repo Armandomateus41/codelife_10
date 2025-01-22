@@ -10,3 +10,15 @@ Interface Responsiva
 Design simples, limpo e adaptado para diversos tamanhos de tela.
 Estilo Personalizado
 Temas escuros para o editor e um layout centralizado.
+Tecnologias Utilizadas
+React + TypeScript
+Next.js
+OpenAI API
+CSS Responsivo
+Funcionalidades
+Editor de HTML, CSS e JavaScript:
+Três editores independentes com visualização integrada.
+Botão "Sugerir Melhorias":
+Sugestões inteligentes fornecidas pela API da OpenAI.
+Interface Dinâmica:
+Layout adaptável e personalizável.
